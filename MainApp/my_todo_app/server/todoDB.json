@@ -1,0 +1,25 @@
+{
+    "tasks" : [
+        {
+            "id": "1",
+            "title": "Make dinner",
+            "completed": "false",
+            "creation_date": "11/12/2020",
+            "completion_date": ""
+        },
+        {
+            "id": "2",
+            "title": "Do homework",
+            "completed": "true",
+            "creation_date": "10/12/2020",
+            "completion_date": "10/12/2020"
+        },
+        {
+            "id": "3",
+            "title": "Get groceries",
+            "completed": "false",
+            "creation_date": "12/12/2020",
+            "completion_date": ""
+        }
+    ]
+}
