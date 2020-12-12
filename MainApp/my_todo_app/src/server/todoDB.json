@@ -1,0 +1,26 @@
+{
+    "tasks":[
+
+        {
+            "id": "1",
+            "title": "Buy bread",
+            "completed": false,
+            "creation_date": "10/11/2020",
+            "completion_date": ""
+        },
+        {
+            "id": "2",
+            "title": "Buy milk",
+            "completed": true,
+            "creation_date": "11/11/2020",
+            "completion_date": "11/11/2020"
+        },
+        {
+            "id": "3",
+            "title": "Do homework",
+            "completed": false,
+            "creation_date": "10/11/2020",
+            "completion_date": ""
+        }
+    ]
+}
