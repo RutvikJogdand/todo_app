@@ -17,7 +17,7 @@
     margin-left: 20px;
     margin-bottom: 30px; 
     padding: 20px;
-    height: 350px;
+    height: 400px;
     position: relative;
 }
 
@@ -27,6 +27,6 @@
 
 .btnContainer{
     position: absolute;
-    top: 300px;
+    top: 350px;
     margin-left: 22%;
 }

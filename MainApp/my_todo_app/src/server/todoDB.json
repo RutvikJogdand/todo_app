@@ -7,7 +7,7 @@
       "creation_date": "12/13/2020",
       "completion_date": "12/13/2020",
       "tags": [
-        "work",
+        "groceries",
         "chores"
       ]
     },
@@ -24,13 +24,13 @@
     },
     {
       "id": "3",
-      "title": "Do homework",
+      "title": "Do Maths Homework",
       "completed": false,
       "creation_date": "4/25/2020",
       "completion_date": "12/13/2020",
       "tags": [
-        "work",
-        "necessary"
+        "abcd",
+        "def"
       ]
     },
     {
@@ -51,6 +51,28 @@
       "creation_date": "12/13/2020",
       "completion_date": "12/13/2020",
       "tags": [
+        "work"
+      ]
+    },
+    {
+      "id": "9a4a18b8-0d1f-4ac3-9d7b-8f46c9b0aa1b",
+      "title": "Buy something",
+      "completed": false,
+      "creation_date": "12/13/2020",
+      "completion_date": "",
+      "tags": [
+        "abcd",
+        "def"
+      ]
+    },
+    {
+      "id": "e575df40-7241-4b57-b858-ef97dc171cdc",
+      "title": "Do English Homework",
+      "completed": false,
+      "creation_date": "12/13/2020",
+      "completion_date": "",
+      "tags": [
+        "study",
         "work"
       ]
     }

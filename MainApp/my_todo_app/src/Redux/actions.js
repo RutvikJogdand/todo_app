@@ -64,23 +64,9 @@ export const complete_todo = (payload) => (dispatch) => {
 
         
         complete_todo_success(res.data)
-        
+        dispatch(get_todos())
         // console.log(res.data)
-        dispatch(get_todos_req())
-        axios
-        .get("http://localhost:3000/tasks")
-        .then((res) => {
-
-            // console.log(res)
-
-            dispatch(get_todos_success(res.data))
-        })
-        .catch((err) => {
-
-            console.log(err)
-
-            dispatch(get_todos_failure(err))
-        })
+       
     })
     .catch((err) => {
 
@@ -119,6 +105,8 @@ export const add_todo = (payload) => (dispatch) => {
         tags: payload.tags 
       })
       .then((response) => {
+
+        dispatch(get_todos())
         console.log(response);
       }, (error) => {
         console.log(error);
@@ -140,3 +128,23 @@ export const edit_todo_failure = (payload) => ({
     type: EDIT_TODO_FAILURE,
     payload
 })
+
+export const edit_todo = (payload) => (dispatch) => {
+
+    dispatch(edit_todo_req())
+    axios.put(`http://localhost:3000/tasks/${payload.id}`, {
+        id: payload.id,
+        title: payload.title, 
+        completed: payload.completed, 
+        creation_date: payload.creation_date, 
+        completion_date: payload.completion_date, 
+        tags: payload.tags 
+      })
+      .then((response) => {
+
+        dispatch(get_todos())
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+}
