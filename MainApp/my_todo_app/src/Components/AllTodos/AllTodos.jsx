@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {get_todos, complete_todo, add_todo, edit_todo} from "./../../Redux/actions"
+import {get_todos, complete_todo, add_todo, edit_todo, delete_todo} from "./../../Redux/actions"
 import { v4 as uuidv4 } from 'uuid'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -68,6 +68,15 @@ function AllTodos()
         setTags(e.target.value)
     }
 
+    const handleKey = (e) => {
+
+        if(e.key === "Enter")
+        {
+            handleAdd()
+        }
+
+    }
+
     const handleAdd = () => {
 
         let allTags = tags.trim().split(",")
@@ -122,14 +131,23 @@ function AllTodos()
         setOpen(false);
 
     }
+
+    const handleDelete = (id) => {
+
+
+        dispatch(delete_todo(id))
+    }
     // console.log(task, "TASK")
     // console.log(tags, "TAGS")
     return(
         <>
-            <div className={styles.todosContainer}>
+            <div onKeyPress={handleKey}>
                 <input type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} />
+                <br/>
                 <input type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} />
+                <br/>
                 <button onClick={handleAdd}>Add</button>
+                
             </div>
             <section className={styles.todosContainer}>
                 {
@@ -155,7 +173,7 @@ function AllTodos()
                                     <button onClick={() => handleComplete(item.id, item.title, item.completed, item.creation_date,  new Date().toLocaleDateString(), item.tags )} className="btn btn-success rounded-circle">
                                         <i className="fa fa-check"></i>
                                     </button>
-                                    <button className="btn btn-danger rounded-circle">
+                                    <button onClick={() =>handleDelete(item.id)} className="btn btn-danger rounded-circle">
                                         <i className="fa fa-close"></i>
                                     </button>
                                 </div>                
@@ -180,8 +198,8 @@ function AllTodos()
                 <Fade in={open}>
                 <div className={classes.paper}>
                     <h3>Edit:</h3>
-                    <input type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} />
-                    <input type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} />
+                    <input type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} /><br/>
+                    <input type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} /><br/>
                     <button onClick={handleEdit}>Edit</button>
                 </div>
                 </Fade>

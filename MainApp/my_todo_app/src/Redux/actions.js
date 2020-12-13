@@ -2,7 +2,8 @@
 import { GET_TODOS_REQUEST, GET_TODOS_SUCCESS, GET_TODOS_FAILURE,
     TODO_COMPLETE_REQUEST, TODO_COMPLETE_SUCCESS, TODO_COMPLETE_FAILURE,
     ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_FAILURE,
-    EDIT_TODO_REQUEST, EDIT_TODO_SUCCESS, EDIT_TODO_FAILURE } from "./actionTypes";
+    EDIT_TODO_REQUEST, EDIT_TODO_SUCCESS, EDIT_TODO_FAILURE,
+    DELETE_TODO_REQUEST, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE } from "./actionTypes";
 import axios from "axios"
 
 export const get_todos_req = () => ({
@@ -147,4 +148,37 @@ export const edit_todo = (payload) => (dispatch) => {
       }, (error) => {
         console.log(error);
       });
+}
+
+// Delete Todo actions
+
+export const delete_todo_req = () => ({
+    type: DELETE_TODO_REQUEST
+})
+
+export const delete_todo_success = (payload) => ({
+    type: DELETE_TODO_SUCCESS,
+    payload
+})
+
+export const delete_todo_failure = (payload) => ({
+    type: DELETE_TODO_FAILURE,
+    payload
+})
+
+export const delete_todo = (payload) => (dispatch) => {
+
+    dispatch(delete_todo_req())
+    axios.delete(`http://localhost:3000/tasks/${payload}`)
+      .then((response) => {
+
+        dispatch(get_todos())
+        dispatch(delete_todo_success(response.data))
+        console.log(response);
+      }, (error) => {
+
+        dispatch(delete_todo_failure(error))
+        console.log(error);
+      });
+
 }

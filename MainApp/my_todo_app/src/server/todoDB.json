@@ -29,8 +29,7 @@
       "creation_date": "4/25/2020",
       "completion_date": "12/13/2020",
       "tags": [
-        "abcd",
-        "def"
+        "homework"
       ]
     },
     {
@@ -55,25 +54,24 @@
       ]
     },
     {
-      "id": "9a4a18b8-0d1f-4ac3-9d7b-8f46c9b0aa1b",
-      "title": "Buy something",
-      "completed": false,
-      "creation_date": "12/13/2020",
-      "completion_date": "",
-      "tags": [
-        "abcd",
-        "def"
-      ]
-    },
-    {
-      "id": "e575df40-7241-4b57-b858-ef97dc171cdc",
+      "id": "5500ac5a-d628-4e45-a886-41e35a49948b",
       "title": "Do English Homework",
       "completed": false,
       "creation_date": "12/13/2020",
       "completion_date": "",
       "tags": [
-        "study",
-        "work"
+        "homework"
+      ]
+    },
+    {
+      "id": "42f07a2f-aa90-4596-97e3-1f115b54cb07",
+      "title": "Do Maths Homework",
+      "completed": false,
+      "creation_date": "12/13/2020",
+      "completion_date": "12/13/2020",
+      "tags": [
+        "homework",
+        " work"
       ]
     }
   ]
