@@ -1,17 +1,6 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Buy bread",
-      "completed": false,
-      "creation_date": "12/13/2020",
-      "completion_date": "12/13/2020",
-      "tags": [
-        "groceries",
-        "chores"
-      ]
-    },
-    {
       "id": "2",
       "title": "Buy milk and cheese",
       "completed": true,
@@ -27,7 +16,7 @@
       "title": "Do History Homework",
       "completed": false,
       "creation_date": "4/25/2020",
-      "completion_date": "12/13/2020",
+      "completion_date": "12/14/2020",
       "tags": [
         "homework",
         " studies"
@@ -35,34 +24,35 @@
     },
     {
       "id": "4aa0d3bb-3ad3-4d87-beee-e25f088dc607",
-      "title": "Buy Groceries",
-      "completed": true,
+      "title": "Buy Groceries and bread",
+      "completed": false,
       "creation_date": "12/13/2020",
       "completion_date": "12/14/2020",
       "tags": [
         "chores",
-        " groceries"
+        "groceries"
       ]
     },
     {
       "id": "7d9b4395-786c-4ec8-96e5-6b6cf1d25ca9",
       "title": "Make a todo app using React, javascript, Redux and json",
-      "completed": false,
+      "completed": true,
       "creation_date": "12/13/2020",
       "completion_date": "12/14/2020",
       "tags": [
-        "work"
+        "work",
+        " tech"
       ]
     },
     {
       "id": "5500ac5a-d628-4e45-a886-41e35a49948b",
-      "title": "Buy something new",
+      "title": "Buy something more",
       "completed": false,
       "creation_date": "12/13/2020",
       "completion_date": "12/14/2020",
       "tags": [
         "homework",
-        " chores"
+        "chores"
       ]
     },
     {
@@ -70,7 +60,7 @@
       "title": "Do Maths Homework",
       "completed": true,
       "creation_date": "12/13/2020",
-      "completion_date": "12/13/2020",
+      "completion_date": "12/14/2020",
       "tags": [
         "homework",
         " work",

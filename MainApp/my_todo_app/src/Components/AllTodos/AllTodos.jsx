@@ -29,14 +29,15 @@ function AllTodos()
     const todosArr = useSelector(state => state.todoRoot.todos_arr)
     const [task, setTask] = useState("")
     const [tags, setTags] = useState("")
-    // const [tagsArr, setTagsArr] = useState([])
+    const [filterTag, setFilterTag] = useState("")
+    const [tagsArr, setTagsArr] = useState([])
     const [todoId, setTodoId] = useState("")
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     
-    console.log(todosArr)
+    // console.log(todosArr)
     useEffect(() => {
         
         dispatch(get_todos())
@@ -116,11 +117,6 @@ function AllTodos()
                 allTags = todoItem.tags
             }
 
-            // console.log(allTags)
-
-           
-
-        
             dispatch(edit_todo({
                 id: todoItem.id,
                 title: task || todoItem.title,
@@ -145,6 +141,46 @@ function AllTodos()
 
         dispatch(delete_todo(id))
     }
+
+    const handleTagFilters = (e) => {
+
+        setFilterTag(e.target.value)
+    }
+
+    const handleFilterKey = (e) => {
+
+        if(e.key === "Enter")
+        {
+            setTagsArr([...tagsArr,filterTag])
+
+           setFilterTag("")
+        }
+        
+        
+        
+    }
+
+    const handleFilterAdd = (e) => {
+
+        setTagsArr([filterTag, ...tagsArr])
+
+           setFilterTag("")
+    }
+
+    const handleFilterTagDelete = (todoItem) =>{
+
+        if(tagsArr.length > 0)
+        {
+            setTagsArr(tagsArr.filter(item => item !== todoItem))
+        }
+
+    }
+
+    const handleClearFilters = () => {
+
+        setTagsArr([])
+    }
+    console.log(tagsArr)
     // console.log(task, "TASK")
     // console.log(tags, "TAGS")
     return(
@@ -154,13 +190,28 @@ function AllTodos()
                 <br/>
                 <input className={styles.inputField} type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} />
                 <br/>
-                <button onClick={handleAdd}>Add</button>
+                <button className="btn btn-dark" onClick={handleAdd}>Add</button>
                 
+            </div>
+            <br/>
+            <br/>
+            <div >
+                <input className={styles.filterTagInput} onKeyPress={handleFilterKey} type="search" name="filterTag" value={filterTag} onChange={handleTagFilters} placeholder="Search by hashtag" />
+                <span onClick={handleFilterAdd} className="btn btn-dark"><i className="fa fa-plus"></i> </span>
+                <button onClick={handleClearFilters} className="btn btn-dark m-2">Clear all</button>
+            </div>
+            <div>
+                {tagsArr && tagsArr.map(item => {
+
+                    return(
+                        <button onClick={() => handleFilterTagDelete(item)} className="badge bg-primary m-2">{item} <i className="fa fa-close"></i> </button>
+                    )
+                })}
             </div>
             <h2>Pending TODOs:</h2>
             <section className={styles.todosContainer}>
                 {
-                    todosArr && todosArr.filter(item => item.completed === false).map(item => { //completion_date
+                    todosArr && todosArr.filter(item => item.completed === false && tagsArr.length >0? item.tags.includes(...tagsArr): item.completed === false).map(item => { //completion_date
 
                         return(
                             <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white"}}>
@@ -170,7 +221,7 @@ function AllTodos()
                                 <small> {item.tags.map(item => {
 
                                     return(
-                                        <small> #{item} </small>
+                                        <small key={uuidv4()}> #{item} </small>
                                     )
                                 })}  </small>
                                 <p> {item.title} </p>
@@ -197,7 +248,7 @@ function AllTodos()
             <section className={styles.todosContainer}>
 
                 {
-                    todosArr && todosArr.filter(item => item.completed === true).map(item => { //completion_date
+                    todosArr && todosArr.filter(item => item.completed === true && tagsArr.length >0? item.tags.includes(...tagsArr): item.completed === true).map(item => { //completion_date
 
                         return(
                             <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white"}}>
@@ -207,7 +258,7 @@ function AllTodos()
                                 <small> {item.tags.map(item => {
 
                                     return(
-                                        <small> #{item} </small>
+                                        <small key={uuidv4()}> #{item} </small>
                                     )
                                 })}  </small>
                                 <p> {item.title} </p>
@@ -247,7 +298,7 @@ function AllTodos()
                     <h3>Edit:</h3>
                     <input className={styles.inputField} type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} /><br/>
                     <input className={styles.inputField} type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} /><br/>
-                    <button onClick={handleEdit}>Edit</button>
+                    <button className="btn btn-dark" onClick={handleEdit}>Edit</button>
                 </div>
                 </Fade>
             </Modal>

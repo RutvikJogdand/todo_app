@@ -64,7 +64,7 @@ export const complete_todo = (payload) => (dispatch) => {
     .then((res) => {
 
         
-        complete_todo_success(res.data)
+        dispatch(complete_todo_success(res.data))
         dispatch(get_todos())
         // console.log(res.data)
        
@@ -108,7 +108,7 @@ export const add_todo = (payload) => (dispatch) => {
       .then((response) => {
 
         dispatch(get_todos())
-        console.log(response);
+        // console.log(response);
       }, (error) => {
         console.log(error);
       });
@@ -144,7 +144,7 @@ export const edit_todo = (payload) => (dispatch) => {
       .then((response) => {
 
         dispatch(get_todos())
-        console.log(response);
+        // console.log(response);
       }, (error) => {
         console.log(error);
       });
@@ -174,7 +174,7 @@ export const delete_todo = (payload) => (dispatch) => {
 
         dispatch(get_todos())
         dispatch(delete_todo_success(response.data))
-        console.log(response);
+        // console.log(response);
       }, (error) => {
 
         dispatch(delete_todo_failure(error))

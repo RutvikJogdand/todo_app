@@ -36,8 +36,21 @@
 
     width: 300px;
     margin-bottom: 10px;
+    padding: 5px;
 }
 
 .inputContainer{
     margin: 20px;
+}
+
+.filterTagInput{
+    padding: 5px;
+   
+    margin-top: 10px;
+}
+
+
+.filterTagInput  button{
+    margin-top: -7px;
+    margin-left: 10px;
 }
