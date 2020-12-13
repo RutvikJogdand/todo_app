@@ -29,27 +29,35 @@ function AllTodos()
     const todosArr = useSelector(state => state.todoRoot.todos_arr)
     const [task, setTask] = useState("")
     const [tags, setTags] = useState("")
-    const [tagsArr, setTagsArr] = useState([])
+    // const [tagsArr, setTagsArr] = useState([])
     const [todoId, setTodoId] = useState("")
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     
-    // console.log(todosArr)
+    console.log(todosArr)
     useEffect(() => {
         
         dispatch(get_todos())
     }, [dispatch])
     
-    const handleOpen = (id) => {
+    const handleOpen = (id, title, tags) => {
        
         setTodoId(id)
         setOpen(true);
+        
+        tags = tags.join(",")
+
+        setTask(title)
+        // console.log(tags)
+        setTags(tags)
     }
 
     const handleClose = () => {
         setOpen(false);
+        setTask("")
+        setTags("")
     }
 
     const handleComplete = (id, title, completed, creation_date, completion_date, tags) => {
@@ -101,14 +109,14 @@ function AllTodos()
          if(todosArr)
         {
             let todoItem = todosArr.find(item => item.id === todoId)
-            let allTags = tags.trim().split(",") 
+            let allTags = tags.split(",") ;
 
             if(allTags[0] === "")
             {
                 allTags = todoItem.tags
             }
 
-            console.log(allTags)
+            // console.log(allTags)
 
            
 
@@ -141,17 +149,18 @@ function AllTodos()
     // console.log(tags, "TAGS")
     return(
         <>
-            <div onKeyPress={handleKey}>
-                <input type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} />
+            <div onKeyPress={handleKey} className={styles.inputContainer}>
+                <input className={styles.inputField} type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} />
                 <br/>
-                <input type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} />
+                <input className={styles.inputField} type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} />
                 <br/>
                 <button onClick={handleAdd}>Add</button>
                 
             </div>
+            <h2>Pending TODOs:</h2>
             <section className={styles.todosContainer}>
                 {
-                    todosArr && todosArr.sort((a,b) => a.creation_date - b.creation_date ).map(item => { //completion_date
+                    todosArr && todosArr.filter(item => item.completed === false).map(item => { //completion_date
 
                         return(
                             <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white"}}>
@@ -167,7 +176,7 @@ function AllTodos()
                                 <p> {item.title} </p>
 
                                 <div className={styles.btnContainer}>
-                                    <button onClick={() =>handleOpen(item.id)} className="btn btn-info rounded-circle">
+                                    <button onClick={() =>handleOpen(item.id, item.title, item.tags)} className="btn btn-info rounded-circle">
                                         <i className="fa fa-pencil"></i>
                                     </button>
                                     <button onClick={() => handleComplete(item.id, item.title, item.completed, item.creation_date,  new Date().toLocaleDateString(), item.tags )} className="btn btn-success rounded-circle">
@@ -181,6 +190,44 @@ function AllTodos()
                         )
                     })
                 }
+
+            </section>
+
+            <h2>Completed TODOs:</h2>
+            <section className={styles.todosContainer}>
+
+                {
+                    todosArr && todosArr.filter(item => item.completed === true).map(item => { //completion_date
+
+                        return(
+                            <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white"}}>
+                                <small> Created: {new Date(item.creation_date).toUTCString() } </small>
+                                {item.completed? <small>Completed: {new Date(item.completion_date).toUTCString()} </small> : ""} 
+                                <br/> 
+                                <small> {item.tags.map(item => {
+
+                                    return(
+                                        <small> #{item} </small>
+                                    )
+                                })}  </small>
+                                <p> {item.title} </p>
+
+                                <div className={styles.btnContainer}>
+                                    <button onClick={() =>handleOpen(item.id, item.title, item.tags)} className="btn btn-info rounded-circle">
+                                        <i className="fa fa-pencil"></i>
+                                    </button>
+                                    <button onClick={() => handleComplete(item.id, item.title, item.completed, item.creation_date,  new Date().toLocaleDateString(), item.tags )} className="btn btn-success rounded-circle">
+                                        <i className="fa fa-check"></i>
+                                    </button>
+                                    <button onClick={() =>handleDelete(item.id)} className="btn btn-danger rounded-circle">
+                                        <i className="fa fa-close"></i>
+                                    </button>
+                                </div>                
+                            </div>
+                        )
+                    })
+                }
+
 
             </section>
             <Modal
@@ -198,8 +245,8 @@ function AllTodos()
                 <Fade in={open}>
                 <div className={classes.paper}>
                     <h3>Edit:</h3>
-                    <input type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} /><br/>
-                    <input type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} /><br/>
+                    <input className={styles.inputField} type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} /><br/>
+                    <input className={styles.inputField} type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} /><br/>
                     <button onClick={handleEdit}>Edit</button>
                 </div>
                 </Fade>

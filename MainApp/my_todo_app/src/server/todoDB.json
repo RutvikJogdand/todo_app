@@ -13,34 +13,35 @@
     },
     {
       "id": "2",
-      "title": "Buy milk",
-      "completed": false,
+      "title": "Buy milk and cheese",
+      "completed": true,
       "creation_date": "11/22/2020",
-      "completion_date": "12/13/2020",
+      "completion_date": "12/14/2020",
       "tags": [
-        "work",
-        "chores"
+        "chores",
+        "groceries"
       ]
     },
     {
       "id": "3",
-      "title": "Do Maths Homework",
+      "title": "Do History Homework",
       "completed": false,
       "creation_date": "4/25/2020",
       "completion_date": "12/13/2020",
       "tags": [
-        "homework"
+        "homework",
+        " studies"
       ]
     },
     {
       "id": "4aa0d3bb-3ad3-4d87-beee-e25f088dc607",
       "title": "Buy Groceries",
-      "completed": false,
+      "completed": true,
       "creation_date": "12/13/2020",
-      "completion_date": "12/13/2020",
+      "completion_date": "12/14/2020",
       "tags": [
-        "groceries",
-        " chores"
+        "chores",
+        " groceries"
       ]
     },
     {
@@ -48,30 +49,32 @@
       "title": "Make a todo app using React, javascript, Redux and json",
       "completed": false,
       "creation_date": "12/13/2020",
-      "completion_date": "12/13/2020",
+      "completion_date": "12/14/2020",
       "tags": [
         "work"
       ]
     },
     {
       "id": "5500ac5a-d628-4e45-a886-41e35a49948b",
-      "title": "Do English Homework",
+      "title": "Buy something new",
       "completed": false,
       "creation_date": "12/13/2020",
-      "completion_date": "",
+      "completion_date": "12/14/2020",
       "tags": [
-        "homework"
+        "homework",
+        " chores"
       ]
     },
     {
       "id": "42f07a2f-aa90-4596-97e3-1f115b54cb07",
       "title": "Do Maths Homework",
-      "completed": false,
+      "completed": true,
       "creation_date": "12/13/2020",
       "completion_date": "12/13/2020",
       "tags": [
         "homework",
-        " work"
+        " work",
+        " study"
       ]
     }
   ]

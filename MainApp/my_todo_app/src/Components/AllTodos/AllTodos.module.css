@@ -19,6 +19,7 @@
     padding: 20px;
     height: 400px;
     position: relative;
+    border-radius: 10px;
 }
 
 .btnContainer > button{
@@ -29,4 +30,14 @@
     position: absolute;
     top: 350px;
     margin-left: 22%;
+}
+
+.inputField{
+
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.inputContainer{
+    margin: 20px;
 }
