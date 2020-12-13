@@ -4,7 +4,7 @@
       "id": "1",
       "title": "Buy bread",
       "completed": false,
-      "creation_date": "12th Nov 2020",
+      "creation_date": "12/13/2020",
       "completion_date": "12/13/2020",
       "tags": [
         "work",
@@ -15,7 +15,7 @@
       "id": "2",
       "title": "Buy milk",
       "completed": false,
-      "creation_date": "11th Nov 2020",
+      "creation_date": "11/22/2020",
       "completion_date": "12/13/2020",
       "tags": [
         "work",
@@ -26,11 +26,32 @@
       "id": "3",
       "title": "Do homework",
       "completed": false,
-      "creation_date": "4th April 2020",
+      "creation_date": "4/25/2020",
       "completion_date": "12/13/2020",
       "tags": [
         "work",
         "necessary"
+      ]
+    },
+    {
+      "id": "4aa0d3bb-3ad3-4d87-beee-e25f088dc607",
+      "title": "Buy Groceries",
+      "completed": false,
+      "creation_date": "12/13/2020",
+      "completion_date": "12/13/2020",
+      "tags": [
+        "groceries",
+        " chores"
+      ]
+    },
+    {
+      "id": "7d9b4395-786c-4ec8-96e5-6b6cf1d25ca9",
+      "title": "Make a todo app using React, javascript, Redux and json",
+      "completed": false,
+      "creation_date": "12/13/2020",
+      "completion_date": "12/13/2020",
+      "tags": [
+        "work"
       ]
     }
   ]

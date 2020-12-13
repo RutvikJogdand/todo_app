@@ -1,1 +1,1 @@
-console.log(new Date("Nov 12th 2020").toTimeString())
+console.log(new Date().toLocaleDateString())

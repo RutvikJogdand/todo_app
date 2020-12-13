@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
+    margin: auto;
 }
 
 .todosContainer > div{
@@ -12,10 +13,12 @@
     box-shadow:         0px 3px 9px 0px rgba(50, 50, 50, 1);
     max-width: 300px;
     min-width: 299px;
-    margin-right: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 30px; 
     padding: 20px;
     height: 350px;
+    position: relative;
 }
 
 .btnContainer > button{
@@ -23,6 +26,7 @@
 }
 
 .btnContainer{
-    position: relative;
-    top: 170px;
+    position: absolute;
+    top: 300px;
+    margin-left: 22%;
 }

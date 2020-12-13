@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { GET_TODOS_REQUEST, GET_TODOS_SUCCESS, GET_TODOS_FAILURE,
-    TODO_COMPLETE_REQUEST, TODO_COMPLETE_SUCCESS, TODO_COMPLETE_FAILURE } from "./actionTypes";
+    TODO_COMPLETE_REQUEST, TODO_COMPLETE_SUCCESS, TODO_COMPLETE_FAILURE,
+    ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_FAILURE,
+    EDIT_TODO_REQUEST, EDIT_TODO_SUCCESS, EDIT_TODO_FAILURE } from "./actionTypes";
 import axios from "axios"
 
 export const get_todos_req = () => ({
@@ -61,8 +63,9 @@ export const complete_todo = (payload) => (dispatch) => {
     .then((res) => {
 
         
+        complete_todo_success(res.data)
         
-        console.log(res.data)
+        // console.log(res.data)
         dispatch(get_todos_req())
         axios
         .get("http://localhost:3000/tasks")
@@ -86,3 +89,54 @@ export const complete_todo = (payload) => (dispatch) => {
         dispatch(complete_todo_failure(err))
     })
 }
+
+// Add todo actions
+
+export const add_todo_req = () => ({
+    type: ADD_TODO_REQUEST
+})
+
+export const add_todo_success = (payload) => ({
+    type: ADD_TODO_SUCCESS,
+    payload
+})
+
+export const add_todo_failure = (payload) => ({
+    type: ADD_TODO_FAILURE,
+    payload
+})
+
+export const add_todo = (payload) => (dispatch) => {
+
+    // console.log(payload)
+    dispatch(add_todo_req())
+    axios.post('http://localhost:3000/tasks', {
+        id: payload.id,
+        title: payload.title, 
+        completed: payload.completed, 
+        creation_date: payload.creation_date, 
+        completion_date: payload.completion_date, 
+        tags: payload.tags 
+      })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+}
+
+// Edit todo actions
+
+export const edit_todo_req = () => ({
+    type: EDIT_TODO_REQUEST
+})
+
+export const edit_todo_success = (payload) => ({
+    type: EDIT_TODO_SUCCESS,
+    payload
+})
+
+export const edit_todo_failure = (payload) => ({
+    type: EDIT_TODO_FAILURE,
+    payload
+})
