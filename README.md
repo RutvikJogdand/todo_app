@@ -34,7 +34,7 @@ This should make your server run on port 3000(default)
   <li>Add a new todo item with required tags (both are required fields.)</li>
   <li>Delete and edit an existing todo item (click on the pencil icon on the card to edit and x to delete that item respectively)</li>
   <li>Search todo item by a single tag from a list of tags</li>
-  <li>Toggle the status of todo item ()</li>
+  <li>Toggle the status of todo item (click on the green "check-mark" to mark it complete)</li>
 </ul>
 
 ## Showing search by tag feature:
