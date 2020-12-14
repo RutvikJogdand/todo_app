@@ -7,6 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import styles from "./AllTodos.module.css"
+import { Typography } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ function AllTodos()
         dispatch(get_todos())
     }, [dispatch])
     
-    const handleOpen = (id, title, tags) => {
+    const handleOpen = (id, title, tags) => { //this handles the opening of the modal to edit a todo
        
         setTodoId(id)
         setOpen(true);
@@ -55,29 +56,29 @@ function AllTodos()
         setTags(tags)
     }
 
-    const handleClose = () => {
+    const handleClose = () => { //this handles the closing of the modal to edit a todo
         setOpen(false);
         setTask("")
         setTags("")
     }
 
-    const handleComplete = (id, title, completed, creation_date, completion_date, tags) => {
+    const handleComplete = (id, title, completed, creation_date, completion_date, tags) => { //this function sends a request to toggle the status of a todo item
 
         dispatch(complete_todo({id, title, completed, creation_date, completion_date, tags}))
 
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e) => { //This handles the todo title input change event
 
         setTask(e.target.value)
     }
     
-    const handleTagChange = (e) => {
+    const handleTagChange = (e) => { //This handles the todo tags input change event
         
         setTags(e.target.value)
     }
 
-    const handleKey = (e) => {
+    const handleKey = (e) => { //Adds a new item at the press of the enter key
 
         if(e.key === "Enter")
         {
@@ -86,7 +87,7 @@ function AllTodos()
 
     }
 
-    const handleAdd = () => {
+    const handleAdd = () => { //This is to add a new todo item (at click of add button or enter key)
 
         let allTags = tags.trim().split(",")
         setTask("")
@@ -105,7 +106,7 @@ function AllTodos()
 
     }
 
-    const handleEdit = () => {
+    const handleEdit = () => { //This is to edit a existing todo item
 
          if(todosArr)
         {
@@ -142,16 +143,16 @@ function AllTodos()
         dispatch(delete_todo(id))
     }
 
-    const handleTagFilters = (e) => {
+    const handleTagFilters = (e) => { //This handles the input onchange event of entering hashtags
 
         setFilterTag(e.target.value)
     }
 
-    const handleFilterKey = (e) => {
+    const handleFilterKey = (e) => { //Pushes the lastest key into the hashtags array at the press of enter key
 
-        if(e.key === "Enter")
+        if(e.key === "Enter" && filterTag)
         {
-            setTagsArr([...tagsArr,filterTag])
+            setTagsArr([filterTag, ...tagsArr])
 
            setFilterTag("")
         }
@@ -160,14 +161,16 @@ function AllTodos()
         
     }
 
-    const handleFilterAdd = (e) => {
+    const handleFilterAdd = (e) => { //Pushes the lastest key into the hashtags array at the press of "+"" button
 
-        setTagsArr([filterTag, ...tagsArr])
-
-           setFilterTag("")
+        if(filterTag)
+        {
+            setTagsArr([filterTag, ...tagsArr])
+               setFilterTag("")
+        }
     }
 
-    const handleFilterTagDelete = (todoItem) =>{
+    const handleFilterTagDelete = (todoItem) =>{ //Deletes a particular hashtag that you were searching by
 
         if(tagsArr.length > 0)
         {
@@ -176,47 +179,52 @@ function AllTodos()
 
     }
 
-    const handleClearFilters = () => {
+    const handleClearFilters = () => { //Clears out all hashtags at the press of Clear all tags button
 
         setTagsArr([])
     }
-    console.log(tagsArr)
-    // console.log(task, "TASK")
-    // console.log(tags, "TAGS")
     return(
         <>
+            <header>
+                <Typography  variant="h2" gutterBottom>
+                    <p className={styles.todoTitleMain}> <u> My Todo List </u> </p>
+                </Typography>
+            </header>
+            {/* Section below is for adding a new todo item */}
             <div onKeyPress={handleKey} className={styles.inputContainer}>
                 <input className={styles.inputField} type="search" name="task" value={task} placeholder="Enter a task" onChange={handleChange} />
                 <br/>
                 <input className={styles.inputField} type="search" name="tags" value={tags} placeholder="Enter tags(comma seperated)" onChange={handleTagChange} />
                 <br/>
-                <button className="btn btn-dark" onClick={handleAdd}>Add</button>
-                
+                <button className="btn btn-dark" onClick={handleAdd}>Add</button>    
             </div>
             <br/>
             <br/>
+            {/* Section below is to add tags to filter todos by */}
             <div >
-                <input className={styles.filterTagInput} onKeyPress={handleFilterKey} type="search" name="filterTag" value={filterTag} onChange={handleTagFilters} placeholder="Search by hashtag" />
-                <span onClick={handleFilterAdd} className="btn btn-dark"><i className="fa fa-plus"></i> </span>
-                <button onClick={handleClearFilters} className="btn btn-dark m-2">Clear all</button>
+                <span style={{justifyContent: "center"}} className="input-group">
+                    <input className={styles.filterTagInput} onKeyPress={handleFilterKey} type="search" name="filterTag" value={filterTag} onChange={handleTagFilters} placeholder="Search by hashtag" />
+                    <span onClick={handleFilterAdd} className="btn btn-dark"><i className="fa fa-plus"></i> </span>
+                </span>
+                <button onClick={handleClearFilters} className="btn btn-dark m-2">Clear all tags</button>
             </div>
             <div>
                 {tagsArr && tagsArr.map(item => {
 
                     return(
-                        <button onClick={() => handleFilterTagDelete(item)} className="badge bg-primary m-2">{item} <i className="fa fa-close"></i> </button>
+                        <span key={uuidv4()} onClick={() => handleFilterTagDelete(item)} className="badge bg-primary m-2">{item} <i className="fa fa-close"></i> </span>
                     )
                 })}
             </div>
+            {/* Section below shows all pending todos */}
             <h2>Pending TODOs:</h2>
             <section className={styles.todosContainer}>
                 {
-                    todosArr && todosArr.filter(item => item.completed === false && tagsArr.length >0? item.tags.includes(...tagsArr): item.completed === false).map(item => { //completion_date
+                    todosArr && todosArr.filter(item => item.completed === false && tagsArr.length >0? item.tags.indexOf(...tagsArr) !== -1: item.completed === false).map(item => { //completion_date
 
                         return(
-                            <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white"}}>
-                                <small> Created: {new Date(item.creation_date).toUTCString() } </small>
-                                {item.completed? <small>Completed: {new Date(item.completion_date).toUTCString()} </small> : ""} 
+                            <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white", color: item.completed? "white":"black"}}>
+                                <small className={styles.CreatedCompleted}> Created: {new Date(item.creation_date).toDateString() }  </small> 
                                 <br/> 
                                 <small> {item.tags.map(item => {
 
@@ -224,7 +232,7 @@ function AllTodos()
                                         <small key={uuidv4()}> #{item} </small>
                                     )
                                 })}  </small>
-                                <p> {item.title} </p>
+                                <p className={styles.todoTitle}> {item.title} </p>
 
                                 <div className={styles.btnContainer}>
                                     <button onClick={() =>handleOpen(item.id, item.title, item.tags)} className="btn btn-info rounded-circle">
@@ -244,16 +252,17 @@ function AllTodos()
 
             </section>
 
+            {/* Section below shows all completed todos */}
             <h2>Completed TODOs:</h2>
             <section className={styles.todosContainer}>
 
                 {
-                    todosArr && todosArr.filter(item => item.completed === true && tagsArr.length >0? item.tags.includes(...tagsArr): item.completed === true).map(item => { //completion_date
+                    todosArr && todosArr.filter(item => item.completed === true && tagsArr.length >0? item.tags.indexOf(...tagsArr) !== -1: item.completed === true).map(item => { //completion_date
 
                         return(
-                            <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white"}}>
-                                <small> Created: {new Date(item.creation_date).toUTCString() } </small>
-                                {item.completed? <small>Completed: {new Date(item.completion_date).toUTCString()} </small> : ""} 
+                            <div key={uuidv4()} style={{backgroundColor: item.completed ? "#4caf50": "white", color: item.completed? "white":"black"}}>
+                                <small className={styles.CreatedCompleted}> Created: {new Date(item.creation_date).toDateString() }  </small> <br/>
+                                {item.completed? <small className={styles.CreatedCompleted}>Completed: {new Date(item.completion_date).toDateString()}  </small> : ""} 
                                 <br/> 
                                 <small> {item.tags.map(item => {
 
@@ -261,7 +270,7 @@ function AllTodos()
                                         <small key={uuidv4()}> #{item} </small>
                                     )
                                 })}  </small>
-                                <p> {item.title} </p>
+                                <p className={styles.todoTitle}> {item.title} </p>
 
                                 <div className={styles.btnContainer}>
                                     <button onClick={() =>handleOpen(item.id, item.title, item.tags)} className="btn btn-info rounded-circle">

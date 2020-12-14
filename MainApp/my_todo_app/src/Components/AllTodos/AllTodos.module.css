@@ -32,7 +32,8 @@
     margin-left: 22%;
 }
 
-.inputField{
+
+.inputField{ 
 
     width: 300px;
     margin-bottom: 10px;
@@ -45,12 +46,27 @@
 
 .filterTagInput{
     padding: 5px;
-   
-    margin-top: 10px;
 }
-
 
 .filterTagInput  button{
-    margin-top: -7px;
     margin-left: 10px;
 }
+
+.todoTitle{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.todoTitleMain{
+
+    font-family: 'Lobster', cursive;
+    background: -webkit-linear-gradient(rgba(126, 126, 126, 0.904), rgb(36, 35, 35));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.CreatedCompleted{
+
+    font-size: 12px;
+}
+

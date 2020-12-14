@@ -19,7 +19,7 @@
       "completion_date": "12/14/2020",
       "tags": [
         "homework",
-        " studies"
+        "studies"
       ]
     },
     {
@@ -41,30 +41,40 @@
       "completion_date": "12/14/2020",
       "tags": [
         "work",
-        " tech"
+        "tech"
       ]
     },
     {
       "id": "5500ac5a-d628-4e45-a886-41e35a49948b",
-      "title": "Buy something more",
+      "title": "Repair sink",
       "completed": false,
       "creation_date": "12/13/2020",
       "completion_date": "12/14/2020",
       "tags": [
-        "homework",
         "chores"
       ]
     },
     {
       "id": "42f07a2f-aa90-4596-97e3-1f115b54cb07",
       "title": "Do Maths Homework",
-      "completed": true,
+      "completed": false,
       "creation_date": "12/13/2020",
       "completion_date": "12/14/2020",
       "tags": [
         "homework",
-        " work",
-        " study"
+        "work",
+        "study"
+      ]
+    },
+    {
+      "id": "77c17923-4b3a-40e1-a796-e9b39d97bfad",
+      "title": "Do Javascript exercises",
+      "completed": false,
+      "creation_date": "12/14/2020",
+      "completion_date": "12/14/2020",
+      "tags": [
+        "work",
+        "tech"
       ]
     }
   ]
